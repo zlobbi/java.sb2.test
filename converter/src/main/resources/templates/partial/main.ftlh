@@ -1,0 +1,48 @@
+<#macro renderWith title="Abc-system!" scripts=[] styles=[]>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+        <title>${title}</title>
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+              integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+              crossorigin="anonymous"/>
+
+        <#list styles as styleSource>
+            <link rel="stylesheet" href="${styleSource}"/>
+        </#list>
+    </head>
+
+    <body>
+
+    <header class="header">
+
+    </header>
+
+    <div class="container mt-3">
+        <#if user??>
+            <div class="row mt-3">
+                <p style="text-transform:uppercase;">Авторизован: ${user}</p>
+                <form action="/logout" method="post" class="exit-form ml-auto mb-3">
+                    <#if _csrf??>
+                        <input type="hidden" name="${(_csrf.parameterName)!'csrf'}"
+                               value="${(_csrf.token)!'--no-token--'}"/>
+                    </#if>
+                    <button type="submit" class="btn mx-auto border rounded btn-light">Выйти</button>
+                </form>
+            </div>
+        </#if>
+        <#nested>
+    </div>
+
+    </body>
+    </html>
+    <#list scripts as scriptSource>
+        <script src="${scriptSource}"></script>
+    </#list>
+
+</#macro>
