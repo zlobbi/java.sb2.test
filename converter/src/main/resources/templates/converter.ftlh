@@ -57,33 +57,6 @@
                         style="width: 250px;">Конвертировать
                 </button>
             </div>
-
-        </form>
-    </div>
-    <div class="row">
-        <form action="/filter" class="mx-auto" method="post">
-            <#if _csrf??>
-                <input type="hidden" name="${(_csrf.parameterName)!'csrf'}"
-                       value="${(_csrf.token)!'--no-token--'}"/>
-            </#if>
-            <input type="date" name="date">
-            <#if day??>
-                <#if day.valutes?has_content>
-                    <select name="fromVal" style="max-width: 250px;">
-                        <option disabled selected>Выберите валюту</option>
-                        <#list  day.valutes as v>
-                            <option value="${v.id}">${v.charCode} (${v.name})</option>
-                        </#list>
-                    </select>
-                    <select name="toVal" style="max-width: 250px;">
-                        <option disabled selected>Выберите валюту</option>
-                        <#list  day.valutes as v>
-                            <option value="${v.id}">${v.charCode} (${v.name})</option>
-                        </#list>
-                    </select>
-                </#if>
-            </#if>
-            <button type="submit">фильтровать</button>
         </form>
     </div>
 
