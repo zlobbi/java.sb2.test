@@ -1,6 +1,6 @@
 <#import "partial/main.ftlh" as main />
 
-<@main.renderWith title="converter" styles=["/css/login.css"]>
+<@main.renderWith title="converter" scripts=["/js/converter.js"] styles=["/css/converter.css"]>
     <#if !day.valutes?has_content>
         <div class="alert alert-danger" role="alert" style="margin-top: 20px">
             <div style="align-content: center">
@@ -9,7 +9,7 @@
         </div>
     </#if>
     <div class="row">
-        <form class="mx-auto mt-3 pb-4 px-5 mb-5 border border-right-0 border-left-0 border-dark" action="/exchange"
+        <form class="mx-auto pb-4 px-5 mb-5 border border-right-0 border-left-0 border-dark" action="/exchange"
               method="post"
         >
             <#if _csrf??>
@@ -88,17 +88,18 @@
     </div>
 
     <div class="history-block mb-5">
-        <table class="table">
+        <table id="dtVerticalScroll" class="table table-striped "
+               width="100%">
             <thead>
             <tr>
-                <th scope="col">Исходная валюта</th>
-                <th scope="col">Целевая валюта</th>
-                <th scope="col">Исходная сумма</th>
-                <th scope="col">Полученная сумма</th>
-                <th scope="col">Дата</th>
+                <th class="">Исходная валюта</th>
+                <th class="th-sm">Целевая валюта</th>
+                <th class="th-sm">Исходная сумма</th>
+                <th class="th-sm">Полученная сумма</th>
+                <th class="th-sm">Дата</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody class="">
             <#if filtered?? >
                 <#list filtered as ex>
                     <tr class="exchange-details">
