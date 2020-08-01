@@ -88,11 +88,11 @@
     </div>
 
     <div class="history-block mb-5">
-        <table id="dtVerticalScroll" class="table table-striped "
+        <table id="dtVerticalScroll" class="table"
                width="100%">
             <thead>
             <tr>
-                <th class="">Исходная валюта</th>
+                <th class="th-sm">Исходная валюта</th>
                 <th class="th-sm">Целевая валюта</th>
                 <th class="th-sm">Исходная сумма</th>
                 <th class="th-sm">Полученная сумма</th>
