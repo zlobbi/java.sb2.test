@@ -20,14 +20,17 @@ public class DayService {
     private ValuteRepository valuteRepository;
 
     public Day getById(LocalDate date) {
-        if (!dayRepository.existsById(LocalDate.now())) fetchAndFillDayWithValutes();
+        if (!dayRepository.existsById(date)) {
+            fetchAndFillDayWithValutes(date);
+        }
         return dayRepository.findById(date).get();
     }
 
-    public void fetchAndFillDayWithValutes() {
+    public void fetchAndFillDayWithValutes(LocalDate date) {
+        dayRepository.save(new Day(date));
         try {
             // cbr link to get data
-            var URL = "http://www.cbr.ru/scripts/XML_daily.asp?date_req=" + LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            var URL = "http://www.cbr.ru/scripts/XML_daily.asp?date_req=" + date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
             Elements elements = Jsoup.connect(URL).ignoreContentType(true).get().getElementsByTag("Valute");
             Valute v;
@@ -40,7 +43,7 @@ public class DayService {
                 v.setNominal(Integer.parseInt(e.getElementsByTag("Nominal").get(0).text()));
                 v.setName(e.getElementsByTag("Name").get(0).text());
                 v.setValue(Float.parseFloat(e.getElementsByTag("Value").get(0).text().replace(",", ".")));
-                v.setDay(dayRepository.findById(LocalDate.now()).get());
+                v.setDay(dayRepository.findById(date).get());
                 valuteRepository.save(v);
             }
         } catch (Exception ex) {

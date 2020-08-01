@@ -19,7 +19,7 @@ public class Day {
     @Id
     private LocalDate id;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "day")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "day")
     private List<Valute> valutes;
 
     public Day(LocalDate date) {

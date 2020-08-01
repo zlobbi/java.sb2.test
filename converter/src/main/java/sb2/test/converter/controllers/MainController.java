@@ -22,7 +22,6 @@ public class MainController {
 
     @GetMapping
     public String root(Model model, Principal principal) {
-        if (!model.containsAttribute("day"))
         model.addAttribute("day", dayService.getById(LocalDate.now()));
         model.addAttribute("user", principal.getName());
         model.addAttribute("exchangeHistory", exchangeService.getAllByUserName(principal.getName()));

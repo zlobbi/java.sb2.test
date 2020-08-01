@@ -19,7 +19,7 @@ public class PreloadCurrencyData {
             if (!dayRepository.existsById(LocalDate.now())) {
                 dayRepository.save(new Day(LocalDate.now()));
             }
-            dayService.fetchAndFillDayWithValutes();
+            dayService.fetchAndFillDayWithValutes(LocalDate.now());
 
         };
     }

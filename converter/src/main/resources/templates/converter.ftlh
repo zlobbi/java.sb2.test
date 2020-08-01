@@ -1,7 +1,13 @@
 <#import "partial/main.ftlh" as main />
 
 <@main.renderWith title="converter" styles=["/css/login.css"]>
-
+    <#if !day.valutes?has_content>
+        <div class="alert alert-danger" role="alert" style="margin-top: 20px">
+            <div style="align-content: center">
+                Перезагрузите страницу
+            </div>
+        </div>
+    </#if>
     <div class="row">
         <form class="mx-auto mt-3 pb-4 px-5 mb-5 border border-right-0 border-left-0 border-dark" action="/exchange"
               method="post"
@@ -16,16 +22,18 @@
             <div class="form-group mx-auto">
                 <#if day??>
                     <select name="fromValute" required style="max-width: 250px;">
-                        <#list  day.valutes as v>
-                            <#if fromVal?? && fromVal==v.id>
-                                <option selected value="${v.id}">${v.charCode} (${v.name})</option>
-                            <#else>
-                                <option value="${v.id}">${v.charCode} (${v.name})</option>
-                            </#if>
-                        </#list>
+                        <#if day.valutes?has_content>
+                            <#list  day.valutes as v>
+                                <#if fromVal?? && fromVal==v.id>
+                                    <option selected value="${v.id}">${v.charCode} (${v.name})</option>
+                                <#else>
+                                    <option value="${v.id}">${v.charCode} (${v.name})</option>
+                                </#if>
+                            </#list>
+                        </#if>
                     </select>
                     <select name="toValute" required style="max-width: 250px;">
-                        <#if day.valutes??>
+                        <#if day.valutes?has_content>
                             <#list  day.valutes as v>
                                 <#if toVal?? && toVal==v.id>
                                     <option selected value="${v.id}">${v.charCode} (${v.name})</option>
@@ -60,18 +68,20 @@
             </#if>
             <input type="date" name="date">
             <#if day??>
-                <select name="fromVal" style="max-width: 250px;">
-                    <option disabled selected>Выберите валюту</option>
-                    <#list  day.valutes as v>
-                        <option value="${v.id}">${v.charCode} (${v.name})</option>
-                    </#list>
-                </select>
-                <select name="toVal" style="max-width: 250px;">
-                    <option disabled selected>Выберите валюту</option>
-                    <#list  day.valutes as v>
-                        <option value="${v.id}">${v.charCode} (${v.name})</option>
-                    </#list>
-                </select>
+                <#if day.valutes?has_content>
+                    <select name="fromVal" style="max-width: 250px;">
+                        <option disabled selected>Выберите валюту</option>
+                        <#list  day.valutes as v>
+                            <option value="${v.id}">${v.charCode} (${v.name})</option>
+                        </#list>
+                    </select>
+                    <select name="toVal" style="max-width: 250px;">
+                        <option disabled selected>Выберите валюту</option>
+                        <#list  day.valutes as v>
+                            <option value="${v.id}">${v.charCode} (${v.name})</option>
+                        </#list>
+                    </select>
+                </#if>
             </#if>
             <button type="submit">фильтровать</button>
         </form>
