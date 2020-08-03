@@ -1,0 +1,61 @@
+/* BASIC */
+
+body {
+    font-family: "Poppins", sans-serif;
+    height: 100vh;
+}
+
+h2 {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    display:inline-block;
+    margin: 40px 8px 10px 8px;
+    color: #353332;
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    min-height: 100%;
+    padding: 20px;
+}
+
+.formContent {
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
+    background: #fff;
+    padding: 30px;
+    width: 100%;
+    max-width: 660px;
+    position: relative;
+    padding: 0px;
+    -webkit-box-shadow: 0 30px 30px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    text-align: center;
+}
+
+.header {
+    border-radius: 0px 0px 10px 10px;
+    background: #fff;
+    padding: 15px;
+    width: 100%;
+    position: relative;
+    -webkit-box-shadow: 0 30px 30px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+}
+
+
+.footer {
+    border-radius: 10px 10px 0px 0px;
+    background: #fff;
+    padding: 15px;
+    width: 100%;
+    position: relative;
+    -webkit-box-shadow: 0 30px 30px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+}

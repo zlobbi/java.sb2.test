@@ -8,59 +8,62 @@
             </div>
         </div>
     </#if>
-    <div class="row">
-        <form class="mx-auto pb-4 px-5 mb-5 border border-right-0 border-left-0 border-dark" action="/exchange"
-              method="post"
-        >
-            <#if _csrf??>
-                <input type="hidden" name="${(_csrf.parameterName)!'csrf'}"
-                       value="${(_csrf.token)!'--no-token--'}"/>
-            </#if>
-            <div class="mx-auto pb-2 text-center">
-                <h2 class="text-dark">Конвертер</h2>
-            </div>
-            <div class="form-group mx-auto">
-                <#if day??>
-                    <select name="fromValute" required style="max-width: 250px;">
-                        <#if day.valutes?has_content>
-                            <#list  day.valutes as v>
-                                <#if fromVal?? && fromVal==v.id>
-                                    <option selected value="${v.id}">${v.charCode} (${v.name})</option>
-                                <#else>
-                                    <option value="${v.id}">${v.charCode} (${v.name})</option>
-                                </#if>
-                            </#list>
-                        </#if>
-                    </select>
-                    <select name="toValute" required style="max-width: 250px;">
-                        <#if day.valutes?has_content>
-                            <#list  day.valutes as v>
-                                <#if toVal?? && toVal==v.id>
-                                    <option selected value="${v.id}">${v.charCode} (${v.name})</option>
-                                <#else>
-                                    <option value="${v.id}">${v.charCode} (${v.name})</option>
-                                </#if>
-                            </#list>
-                        </#if>
-                    </select>
+    <div class="wrapper">
+        <div class="formContent mb-3 border border-dark">
+            <form class="mx-auto pb-4 px-5 " action="/exchange"
+                  method="post"
+            >
+                <#if _csrf??>
+                    <input type="hidden" name="${(_csrf.parameterName)!'csrf'}"
+                           value="${(_csrf.token)!'--no-token--'}"/>
                 </#if>
-            </div>
-            <div class="form-group mx-auto justify-content-between row">
-                <input name="initSum" style="width: 250px;" <#if init??>value="${init}"</#if> type="number" step="0.01"
-                       required
-                       placeholder="исходная сумма">
-                <input name="resultSum" style="width: 250px;" <#if sum??>value="${sum}"</#if> disabled
-                       placeholder="получаемая сумма">
-            </div>
-            <div class="form-group d-flex">
-                <button type="submit" class="btn mx-auto btn-light text-dark border-dark mt-2"
-                        style="width: 250px;">Конвертировать
-                </button>
-            </div>
-        </form>
+                <div class="mx-auto pb-2 text-center">
+                    <h2>Конвертер</h2>
+                </div>
+                <div class="form-group mx-auto">
+                    <#if day??>
+                        <select name="fromValute" required style="max-width: 250px;">
+                            <#if day.valutes?has_content>
+                                <#list  day.valutes as v>
+                                    <#if fromVal?? && fromVal==v.id>
+                                        <option selected value="${v.id}">${v.charCode} (${v.name})</option>
+                                    <#else>
+                                        <option value="${v.id}">${v.charCode} (${v.name})</option>
+                                    </#if>
+                                </#list>
+                            </#if>
+                        </select>
+                        <select name="toValute" required style="max-width: 250px;">
+                            <#if day.valutes?has_content>
+                                <#list  day.valutes as v>
+                                    <#if toVal?? && toVal==v.id>
+                                        <option selected value="${v.id}">${v.charCode} (${v.name})</option>
+                                    <#else>
+                                        <option value="${v.id}">${v.charCode} (${v.name})</option>
+                                    </#if>
+                                </#list>
+                            </#if>
+                        </select>
+                    </#if>
+                </div>
+                <div class="form-group mx-auto justify-content-around row">
+                    <input name="initSum" class="ml-auto mr-2" style="width: 250px;" <#if init??>value="${init}"</#if> type="number"
+                           step="0.01"
+                           required
+                           placeholder="исходная сумма">
+                    <input name="resultSum" class="mr-auto" style="width: 250px;" <#if sum??>value="${sum}"</#if> disabled
+                           placeholder="получаемая сумма">
+                </div>
+                <div class="form-group d-flex">
+                    <button type="submit" class="btn mx-auto btn-light text-dark border-dark"
+                            style="width: 250px;">Конвертировать
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 
-    <div class="history-block mb-5">
+    <div class="history-block mb-5 border border-dark">
         <table id="dtVerticalScroll" class="table"
                width="100%">
             <thead>

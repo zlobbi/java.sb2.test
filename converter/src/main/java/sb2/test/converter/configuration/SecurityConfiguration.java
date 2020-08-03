@@ -30,7 +30,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession(true);
 
         http.authorizeRequests()
-                .antMatchers("/login", "/css/login.css", "/js/login.js").permitAll()
+                .antMatchers("/login", "/css/login.css", "/css/main.css").permitAll()
                 .antMatchers("/**")
                 .authenticated();
     }
@@ -38,8 +38,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public UserDetailsService userDetailsService() {
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-        manager.createUser(User.withUsername("user").password(passwordEncoder().encode("user")).roles("ADMIN").build());
-        manager.createUser(User.withUsername("user1").password(passwordEncoder().encode("user")).roles("USER").build());
+        manager.createUser(User.withUsername("admin").password(passwordEncoder().encode("admin")).roles("ADMIN").build());
+        manager.createUser(User.withUsername("user").password(passwordEncoder().encode("user")).roles("USER").build());
         return manager;
     }
     @Bean

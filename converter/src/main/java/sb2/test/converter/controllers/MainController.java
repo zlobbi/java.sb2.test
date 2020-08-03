@@ -31,7 +31,7 @@ public class MainController {
     @GetMapping("/login")
     public String loginPage(@RequestParam(required = false, defaultValue = "false") Boolean error, Model model) {
         model.addAttribute("error", error);
-        return "sign-in";
+        return "login";
     }
 
     @PostMapping("/exchange")
