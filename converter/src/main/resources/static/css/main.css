@@ -3,6 +3,8 @@
 body {
     font-family: "Poppins", sans-serif;
     height: 100vh;
+    background-image: url("/images/bg.png");
+    background-repeat: repeat;
 }
 
 h2 {
@@ -41,7 +43,6 @@ h2 {
 
 .header {
     border-radius: 0px 0px 10px 10px;
-    background: #fff;
     padding: 15px;
     width: 100%;
     position: relative;
@@ -52,7 +53,6 @@ h2 {
 
 .footer {
     border-radius: 10px 10px 0px 0px;
-    background: #fff;
     padding: 15px;
     width: 100%;
     position: relative;

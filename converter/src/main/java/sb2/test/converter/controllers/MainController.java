@@ -51,4 +51,5 @@ public class MainController {
         attributes.addFlashAttribute("filtered", exchangeService.getFilteredExchanges(params, principal));
         return "redirect:/";
     }
+
 }

@@ -30,7 +30,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession(true);
 
         http.authorizeRequests()
-                .antMatchers("/login", "/css/login.css", "/css/main.css").permitAll()
+                .antMatchers("/login", "/css/login.css", "/css/main.css", "/images/bg.png").permitAll()
                 .antMatchers("/**")
                 .authenticated();
     }
