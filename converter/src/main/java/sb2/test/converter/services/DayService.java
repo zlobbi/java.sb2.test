@@ -1,9 +1,10 @@
 package sb2.test.converter.services;
 
-import lombok.AllArgsConstructor;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import sb2.test.converter.models.Day;
 import sb2.test.converter.models.Valute;
@@ -14,10 +15,14 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @Service
-@AllArgsConstructor
 public class DayService {
+    @Autowired
     private DayRepository dayRepository;
+    @Autowired
     private ValuteRepository valuteRepository;
+
+    @Value("${cbr.url}")
+    private String CBR_URL;
 
     public Day getById(LocalDate date) {
         if (!dayRepository.existsById(date)) {
@@ -30,7 +35,7 @@ public class DayService {
         dayRepository.save(new Day(date));
         try {
             // cbr link to get data
-            var URL = "http://www.cbr.ru/scripts/XML_daily.asp?date_req=" + date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            var URL = CBR_URL + date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
             Elements elements = Jsoup.connect(URL).ignoreContentType(true).get().getElementsByTag("Valute");
             Valute v;
