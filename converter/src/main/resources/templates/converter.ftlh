@@ -4,7 +4,7 @@
     <#if !day.valutes?has_content>
         <div class="alert alert-danger" role="alert" style="margin-top: 20px">
             <div style="align-content: center">
-                Перезагрузите страницу
+                Перезагрузите страницу, если данные не загрузились обратитесь к админу <br> kadyrbek.mavlyanov@gmail.com
             </div>
         </div>
     </#if>

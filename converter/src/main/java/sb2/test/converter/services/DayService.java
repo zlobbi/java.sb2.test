@@ -1,5 +1,6 @@
 package sb2.test.converter.services;
 
+import lombok.Getter;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -13,6 +14,7 @@ import sb2.test.converter.repositories.ValuteRepository;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Map;
 
 @Service
 public class DayService {
@@ -21,6 +23,7 @@ public class DayService {
     @Autowired
     private ValuteRepository valuteRepository;
 
+    @Getter
     @Value("${cbr.url}")
     private String CBR_URL;
 
@@ -54,5 +57,10 @@ public class DayService {
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
+    }
+
+    public void changeCbrUrl(Map<String, String> params) {
+        CBR_URL = params.get("newUrl");
+        fetchAndFillDayWithValutes(LocalDate.now());
     }
 }

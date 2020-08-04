@@ -1,6 +1,8 @@
 package sb2.test.converter.controllers;
 
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +27,7 @@ public class MainController {
         model.addAttribute("day", dayService.getById(LocalDate.now()));
         model.addAttribute("user", principal.getName());
         model.addAttribute("exchangeHistory", exchangeService.getAllByUserName(principal.getName()));
+        addRole(model);
         return "converter";
     }
 
@@ -41,7 +44,6 @@ public class MainController {
         attributes.addFlashAttribute("toVal", Integer.parseInt(params.get("toValute")));
         attributes.addFlashAttribute("init", params.get("initSum"));
         attributes.addFlashAttribute("sum", sum);
-
         return "redirect:/";
     }
 
@@ -50,6 +52,28 @@ public class MainController {
         if (exchangeService.getFilteredExchanges(params, principal).size() != 0)
         attributes.addFlashAttribute("filtered", exchangeService.getFilteredExchanges(params, principal));
         return "redirect:/";
+    }
+
+
+    @GetMapping("/admin-page")
+    public String adminPage(Model model) {
+        model.addAttribute("currentUrl", dayService.getCBR_URL());
+        addRole(model);
+        return "admin-page";
+    }
+
+    @PostMapping("/change-link")
+    public String changeLink(@RequestParam Map<String, String> params) {
+        dayService.changeCbrUrl(params);
+        return "redirect:/admin-page";
+    }
+
+    public void addRole(Model model) {
+        var roles = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+        for (GrantedAuthority role : roles) {
+            if (role.getAuthority().equals("ROLE_ADMIN"))
+                model.addAttribute("admin", "admin");
+        }
     }
 
 }

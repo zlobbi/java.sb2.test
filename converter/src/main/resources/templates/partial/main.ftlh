@@ -30,7 +30,10 @@
         <div class="container">
             <#if user??>
                 <div class="row">
-                    <p class="" style="text-transform:uppercase;">Авторизован: ${user}</p>
+                    <#if admin??>
+                        <a href="/admin-page" class="btn mr-auto border rounded btn-light">Админка</a>
+                        <#else> <p class="" style="text-transform:uppercase;">Авторизован: ${user}</p>
+                    </#if>
                     <form action="/logout" method="post" class="exit-form ml-auto">
                         <#if _csrf??>
                             <input type="hidden" name="${(_csrf.parameterName)!'csrf'}"
