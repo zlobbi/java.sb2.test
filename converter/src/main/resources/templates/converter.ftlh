@@ -2,9 +2,25 @@
 
 <@main.renderWith title="converter" scripts=["/js/converter.js"] styles=["/css/converter.css"]>
     <#if !day.valutes?has_content>
-        <div class="alert alert-danger" role="alert" style="margin-top: 20px">
+        <#if admin??>
+            <div class="alert alert-danger" role="alert" style="margin-top: 20px">
+                <div style="align-content: center">
+                    Текущий адрес не дал результатов. Измените адрес сервиса запроса данных в админке!
+                </div>
+            </div>
+        <#else >
+            <div class="alert alert-danger" role="alert" style="margin-top: 20px">
+                <div style="align-content: center">
+                    Перезагрузите страницу, если данные не загрузились обратитесь к админу <br>
+                    kadyrbek.mavlyanov@gmail.com
+                </div>
+            </div>
+        </#if>
+    </#if>
+    <#if success?? && day.valutes?has_content>
+        <div class="alert alert-success" role="alert" style="margin-top: 20px">
             <div style="align-content: center">
-                Перезагрузите страницу, если данные не загрузились обратитесь к админу <br> kadyrbek.mavlyanov@gmail.com
+                Данные успешно загружены!
             </div>
         </div>
     </#if>
@@ -47,11 +63,13 @@
                     </#if>
                 </div>
                 <div class="form-group mx-auto justify-content-around row">
-                    <input name="initSum" class="ml-auto mr-2" style="width: 250px;" <#if init??>value="${init}"</#if> type="number"
+                    <input name="initSum" class="ml-auto mr-2" style="width: 250px;" <#if init??>value="${init}"</#if>
+                           type="number"
                            step="0.01"
                            required
                            placeholder="исходная сумма">
-                    <input name="resultSum" class="mr-auto" style="width: 250px;" <#if sum??>value="${sum}"</#if> disabled
+                    <input name="resultSum" class="mr-auto" style="width: 250px;" <#if sum??>value="${sum}"</#if>
+                           disabled
                            placeholder="получаемая сумма">
                 </div>
                 <div class="form-group d-flex">

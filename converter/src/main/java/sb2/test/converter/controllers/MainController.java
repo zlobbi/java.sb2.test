@@ -63,9 +63,11 @@ public class MainController {
     }
 
     @PostMapping("/change-link")
-    public String changeLink(@RequestParam Map<String, String> params) {
+    public String changeLink(@RequestParam Map<String,
+            String> params, RedirectAttributes attributes) {
+        attributes.addFlashAttribute("success", "ok");
         dayService.changeCbrUrl(params);
-        return "redirect:/admin-page";
+        return "redirect:/";
     }
 
     public void addRole(Model model) {

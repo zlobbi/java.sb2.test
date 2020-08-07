@@ -1,5 +1,5 @@
 <#import "partial/main.ftlh" as main />
-<@main.renderWith title="converter" scripts=[] styles=[]>
+<@main.renderWith title="admin page" scripts=[] styles=[]>
 
     <div class="alert alert-success text-center" id="hello" role="alert" style="margin-top: 20px; align-content: center">
         <div class="text-left">
